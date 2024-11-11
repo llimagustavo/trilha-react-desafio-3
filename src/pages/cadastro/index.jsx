@@ -1,5 +1,5 @@
 import { useNavigate  } from "react-router-dom";
-import { MdEmail, MdLock } from 'react-icons/md'
+import { MdEmail, MdLock, MdOutlineVerifiedUser, MdPerson, MdUnsubscribe } from 'react-icons/md'
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -8,9 +8,10 @@ import { api } from '../../services/api';
 import { useForm } from "react-hook-form";
 
 
-import { Container, Title, Column, TitleLogin, SubtitleLogin, EsqueciText, CriarText, Row, Wrapper } from './styles';
+import { Container, Title, Column, TitleLogin, SubtitleLogin, TemConta, Termos, FazerLogin, RowCadastro, Wrapper } from './styles';
+import { UserPicture } from "../../components/Header/styles";
 
-const Login = () => {
+const Cadastro = () => {
 
     const navigate = useNavigate()
 
@@ -45,25 +46,26 @@ const Login = () => {
             </Column>
             <Column>
                 <Wrapper>
-                <TitleLogin>Comece agora grátis</TitleLogin>
-                <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
+                <TitleLogin>Faça seu cadastro</TitleLogin>
+                <SubtitleLogin>Crie sua conta e make the change._</SubtitleLogin>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input placeholder="Nome completo" leftIcon={<MdPerson />} name="email"  control={control} />
+                    {errors.email && <span>E-mail é obrigatório</span>}
                     <Input placeholder="E-mail" leftIcon={<MdEmail />} name="email"  control={control} />
                     {errors.email && <span>E-mail é obrigatório</span>}
                     <Input type="password" placeholder="Senha" leftIcon={<MdLock />}  name="senha" control={control} />
                     {errors.senha && <span>Senha é obrigatório</span>}
-                    <Button title="Entrar" variant="secondary" type="submit"/>
+                    <Button title="Criar minha conta" variant="secondary" type="submit"/>
                 </form>
-                <Row>
-                    <EsqueciText>Esqueci minha senha</EsqueciText>
-                    <CriarText onClick={() => navigate("/cadastro")}>
-                        Criar Conta
-                    </CriarText>
-                </Row>
+                <Termos>Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.</Termos>
+                <RowCadastro>
+                    <TemConta>Já tenho conta.</TemConta>
+                    <FazerLogin onClick={() => navigate('/login')}>Fazer login</FazerLogin>
+                </RowCadastro>
                 </Wrapper>
             </Column>
         </Container>
     </>)
 }
 
-export { Login }
+export { Cadastro }
